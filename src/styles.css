@@ -1,0 +1,42 @@
+:root {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #f8fafc;
+  background: #0f172a;
+  font-synthesis: none;
+}
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; min-height: 100vh; }
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+.app { max-width: 980px; margin: 0 auto; padding: 16px; }
+.topbar { display:flex; justify-content:space-between; gap:12px; align-items:center; margin-bottom:16px; }
+.brand h1 { margin:0; font-size:22px; }
+.muted { color:#94a3b8; font-size:13px; }
+.badge { padding:8px 12px; border-radius:999px; border:1px solid #334155; background:#111827; }
+.card { border:1px solid #334155; background:#111827; border-radius:14px; padding:16px; margin-bottom:14px; }
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+@media (max-width:700px){ .grid2{grid-template-columns:1fr;} }
+label { display:block; color:#cbd5e1; font-size:13px; }
+input, select, textarea {
+  width:100%; margin-top:6px; padding:12px; border-radius:10px;
+  border:1px solid #334155; background:#0b1220; color:#f8fafc;
+}
+.actions { display:flex; flex-wrap:wrap; gap:10px; }
+.btn { border:1px solid #334155; background:#172033; color:#f8fafc; padding:12px 14px; border-radius:10px; }
+.btn.primary { background:#14532d; border-color:#22c55e; font-weight:700; }
+.btn.warn { background:#422006; border-color:#f59e0b; }
+.btn.danger { background:#450a0a; border-color:#ef4444; }
+.statusline { padding:12px; border-radius:10px; background:#172033; margin-top:10px; }
+.material-row { display:grid; grid-template-columns:1fr 90px 110px; gap:10px; align-items:center; padding:10px 0; border-bottom:1px solid #263445; }
+@media (max-width:600px){ .material-row{grid-template-columns:1fr 80px;} .material-row .after{grid-column:1/-1;} }
+.tabs { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
+.tab.active { border-color:#22c55e; background:#14532d; }
+.view { display:none; }
+.view.active { display:block; }
+.asset { border:1px solid #334155; border-radius:12px; padding:12px; margin-top:10px; }
+.checks { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+.check { border:1px solid #334155; border-radius:9px; padding:8px 10px; }
+.check input { width:auto; margin:0 6px 0 0; }
+.summary { display:grid; gap:8px; }
+.summary-row { display:flex; justify-content:space-between; gap:12px; border-bottom:1px solid #263445; padding:8px 0; }
+.notice { border-left:4px solid #38bdf8; padding:12px; background:#0c2230; border-radius:8px; }
