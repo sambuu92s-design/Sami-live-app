@@ -1,0 +1,16 @@
+{
+  "name": "paste-pipe-live-app",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "firebase": "^12.2.1",
+    "vite": "^7.1.3"
+  },
+  "devDependencies": {}
+}
