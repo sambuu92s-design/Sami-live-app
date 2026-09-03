@@ -167,7 +167,7 @@ renderMaterialInputs();
 async function ensureInventorySeeded() {
   const defaults = {
     "Steel Pipe – 6 m": 42, "Steel Pipe – 4 m": 18, "Steel Pipe – 2 m": 14,
-    "Steel Pipe – 1 m": 10, "Steel Pipe – Bend": 8, "Victaulic Clamp / Coupling": 160,
+    "Steel Pipe – 1 m": 10, "Steel Pipe – Bend": 8, "Victaulic Clamp - Coupling": 160,
     "Q Claw": 95, "Dog Leg": 102, "Dome Nut – Ø20 mm": 220, "Rock Bolt – Ø20 mm": 240
   };
   for (const [name, qty] of Object.entries(defaults)) {
