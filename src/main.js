@@ -11,7 +11,7 @@ const MATERIALS = [
   "Steel Pipe – 2 m",
   "Steel Pipe – 1 m",
   "Steel Pipe – Bend",
-  "Victaulic Clamp / Coupling",
+  "Victaulic Clamp - Coupling",
   "Q Claw",
   "Dog Leg",
   "Dome Nut – Ø20 mm",
