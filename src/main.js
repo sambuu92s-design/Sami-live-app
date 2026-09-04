@@ -3,7 +3,8 @@ import {
   collection, doc, setDoc, updateDoc, addDoc, serverTimestamp,
   onSnapshot, query, where, getDoc, getDocs, writeBatch
 } from "firebase/firestore";
-import { db } from "./firebase.js";
+import { db, storage } from "./firebase.js";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const MATERIALS = [
   "Steel Pipe – 6 m",
@@ -109,6 +110,26 @@ app.innerHTML = `
         <textarea id="qaNotes" rows="3"></textarea>
       </label>
     </div>
+<div class="card">
+  <h2>Shift Photos</h2>
+  <div class="muted">Add photos of completed work, QA, damage or site conditions.</div>
+
+  <label style="margin-top:12px">
+    Add photos
+    <input id="shiftPhotos" type="file" accept="image/*" multiple>
+  </label>
+
+  <button id="uploadPhotos" class="btn" style="margin-top:12px">
+    Upload Selected Photos
+  </button>
+
+  <div id="photoMsg" class="notice" style="margin-top:12px">
+    No photos uploaded yet.
+  </div>
+
+  <div id="photoList"></div>
+</div>
+    
 
     <div class="card">
       <h2>Shift Sync</h2>
