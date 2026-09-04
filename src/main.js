@@ -116,7 +116,7 @@ app.innerHTML = `
 
   <label style="margin-top:12px">
     Add photos
-    <input id="shiftPhotos" type="file" accept="image/*" multiple>
+    <input id="shiftPhotos" type="file" accept="image/*" capture="environment">
   </label>
 
   <button id="uploadPhotos" class="btn" style="margin-top:12px">
