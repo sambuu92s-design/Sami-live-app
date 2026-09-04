@@ -264,6 +264,12 @@ function watchApprovals() {
         state.activeShift = { id:d.id, ...s };
         $("#activeMeta").textContent = `${s.shiftType} · ${s.location} · ${s.leadingHand}`;
       }
+      if (state.activeShiftId === d.id && s.status === "COMPLETED") {
+  state.activeShiftId = null;
+  state.activeShift = null;
+  state.assets = [];
+  $("#activeMeta").textContent = "No active shift";
+}
     });
 
     $("#approvalQueue").innerHTML = cards.join("") || `<div class="notice">No approvals waiting.</div>`;
