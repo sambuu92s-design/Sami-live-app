@@ -389,7 +389,58 @@ function renderAssets() {
     });
   });
 }
+$("#uploadPhotos").addEventListener("click", async () => {
+  const input = $("#shiftPhotos");
+  const files = [...input.files];
 
+  if (!state.activeShiftId) {
+    return alert("No active shift.");
+  }
+
+  if (!files.length) {
+    return alert("Take a photo first.");
+  }
+
+  const msg = $("#photoMsg");
+  msg.textContent = "Uploading photo...";
+
+  try {
+    const urls = [];
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const photoRef = ref(
+        storage,
+        `shiftPhotos/${state.activeShiftId}/${Date.now()}-${i}-${file.name}`
+      );
+
+      await uploadBytes(photoRef, file);
+      const url = await getDownloadURL(photoRef);
+      urls.push(url);
+    }
+
+    const shiftRef = doc(db, "shifts", state.activeShiftId);
+    const shiftSnap = await getDoc(shiftRef);
+    const existingPhotos = shiftSnap.data()?.photoUrls || [];
+    const allPhotos = [...existingPhotos, ...urls];
+
+    await updateDoc(shiftRef, {
+      photoUrls: allPhotos,
+      updatedAt: serverTimestamp()
+    });
+
+    msg.textContent = `${urls.length} photo uploaded successfully.`;
+
+    $("#photoList").innerHTML = allPhotos
+      .map(url => `<img src="${url}" style="width:100%;margin-top:12px;border-radius:12px">`)
+      .join("");
+
+    input.value = "";
+  } catch (err) {
+    console.error(err);
+    msg.textContent = `Upload failed: ${err.code || err.message}`;
+  }
+});
 $("#finishShift").addEventListener("click", async () => {
   if (!state.activeShiftId) return alert("No active shift.");
   await updateDoc(doc(db, "shifts", state.activeShiftId), {
