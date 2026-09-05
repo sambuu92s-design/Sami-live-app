@@ -3,9 +3,10 @@ import {
   collection, doc, setDoc, updateDoc, addDoc, serverTimestamp,
   onSnapshot, query, where, getDoc, getDocs, writeBatch
 } from "firebase/firestore";
-import { db, storage } from "./firebase.js";
+import { db, storage, messaging } from "./firebase.js";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-
+import { getToken, onMessage } from "firebase/messaging";
+const VAPID_KEY = "BOvBeU26oKOKUUgVt_pIB-yuM__-9e8jfceXC7qJT_r10SBZJVZ9Ut_c_5gxnJU19Sml9-XzayEACBJL-5zCSek";
 const MATERIALS = [
   "Steel Pipe – 6 m",
   "Steel Pipe – 4 m",
@@ -38,6 +39,7 @@ app.innerHTML = `
       <div class="muted">Offline-first live sample</div>
     </div>
     <div id="netBadge" class="badge"></div>
+    <button id="enableNotifications" class="btn">🔔 Enable Notifications</button>
   </div>
 
   <div class="tabs">
@@ -462,7 +464,40 @@ $("#finishShift").addEventListener("click", async () => {
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js"));
 }
+async function enableNotifications() {
+  try {
+    if (!("Notification" in window)) {
+      alert("Notifications are not supported on this device.");
+      return;
+    }
 
+    const permission = await Notification.requestPermission();
+
+    if (permission !== "granted") {
+      alert("Notification permission was not granted.");
+      return;
+    }
+
+    const registration = await navigator.serviceWorker.ready;
+
+    const token = await getToken(messaging, {
+      vapidKey: VAPID_KEY,
+      serviceWorkerRegistration: registration
+    });
+
+    if (!token) {
+      alert("Could not create notification token.");
+      return;
+    }
+
+    console.log("FCM notification token:", token);
+    alert("Notifications enabled successfully.");
+  } catch (err) {
+    console.error("Notification setup failed:", err);
+    alert(`Notification setup failed: ${err.message}`);
+  }
+}
+$("#enableNotifications").addEventListener("click", enableNotifications);
 (async () => {
   try {
     await ensureInventorySeeded();
