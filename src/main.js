@@ -500,6 +500,14 @@ await registration.showNotification("Shift App Local Test", {
   }
 }
 $("#enableNotifications").addEventListener("click", enableNotifications);
+onMessage(messaging, (payload) => {
+  console.log("Foreground FCM message:", payload);
+
+  alert(
+    `${payload.notification?.title || "Shift App"}\n\n` +
+    `${payload.notification?.body || "Foreground message received."}`
+  );
+});
 (async () => {
   try {
     await ensureInventorySeeded();
