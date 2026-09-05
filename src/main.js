@@ -489,7 +489,9 @@ async function enableNotifications() {
       alert("Could not create notification token.");
       return;
     }
-
+await registration.showNotification("Shift App Local Test", {
+  body: "Local notifications are working."
+});
     prompt("Copy this FCM token:", token);
     alert("Notifications enabled successfully.");
   } catch (err) {
