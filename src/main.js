@@ -490,7 +490,7 @@ async function enableNotifications() {
       return;
     }
 
-    console.log("FCM notification token:", token);
+    prompt("Copy this FCM token:", token);
     alert("Notifications enabled successfully.");
   } catch (err) {
     console.error("Notification setup failed:", err);
